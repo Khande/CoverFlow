@@ -23,4 +23,3 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
 }
 
-apply from: '../maven_push.gradle'

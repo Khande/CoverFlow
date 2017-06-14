@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/darker_gray"
-    tools:context="it.moondroid.carousellayoutdemo.CoverFlowActivity">
+    tools:context="it.moondroid.coverflowdemo.CoverFlowActivity">
 
 
     <it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow
@@ -17,14 +17,27 @@
         coverflow:reflectionGap="0px"
         coverflow:rotationThreshold="0.5"
         coverflow:scalingThreshold="0.5"
+        coverflow:reflectionOpacity="0x00"
+        coverflow:shouldRepeat="false"
         coverflow:spacing="0.6" />
+
+
+    <Button
+        android:id="@+id/btn_go_next"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:onClick="goNextCover"
+        android:text="Next Cover"/>
 
     <TextSwitcher
         android:id="@+id/title"
+        android:layout_above="@id/btn_go_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:layout_alignParentBottom="true"
         android:layout_centerVertical="true" />
-
 </RelativeLayout>

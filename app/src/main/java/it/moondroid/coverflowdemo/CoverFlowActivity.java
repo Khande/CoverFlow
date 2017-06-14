@@ -2,6 +2,7 @@ package it.moondroid.coverflowdemo;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ public class CoverFlowActivity extends ActionBarActivity {
     private CoverFlowAdapter mAdapter;
     private ArrayList<GameEntity> mData = new ArrayList<>(0);
     private TextSwitcher mTitle;
+    private boolean mIsFirstEnter = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +69,12 @@ public class CoverFlowActivity extends ActionBarActivity {
         mCoverFlow.setOnScrollPositionListener(new FeatureCoverFlow.OnScrollPositionListener() {
             @Override
             public void onScrolledToPosition(int position) {
-                mTitle.setText(getResources().getString(mData.get(position).titleResId));
+                if (mIsFirstEnter) {
+                    mCoverFlow.scrollToPosition(0);
+                    mIsFirstEnter = false;
+                } else {
+                    mTitle.setText(getResources().getString(mData.get(position).titleResId));
+                }
             }
 
             @Override
@@ -78,6 +85,30 @@ public class CoverFlowActivity extends ActionBarActivity {
 
     }
 
+    public void goNextCover(View view) {
+        int itemPosition = mCoverFlow.getScrollPosition();
+        if (BuildConfig.DEBUG) Log.d("CoverFlowActivity", "itemPosition:" + itemPosition);
+
+        if (itemPosition == mAdapter.getCount() - 1) {
+            finish();
+        } else {
+            mCoverFlow.scrollToPosition(itemPosition + 1);
+        }
+
+
+
+        // if (mData.size() == 1) {
+        //
+        // } else {
+        //     mData.remove(itemPosition);
+        //     mAdapter.notifyDataSetChanged();
+        // }
+
+
+
+
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
